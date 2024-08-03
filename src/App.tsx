@@ -1,24 +1,27 @@
-
-
-import './App.css'
+import {useEffect} from 'react';
+import {statusApi} from './APIs/checkStatus.ts';
 
 function App() {
+  const apiKey : string = import.meta.env.VITE_API_KEY;
 
+  useEffect(() => {
+    const checkApiStatus = async () => {
+      
+      const apiStatus : boolean = await statusApi(apiKey);
+      if (apiStatus === false) {
+        console.log('API is down');
+      } else {
+        console.log('API is up');
+      }
+    };
+    checkApiStatus();
+  }, []);
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1 className="text-xl flex-row justify-center">blockchain_zero_v2</h1>
     </>
   )
 }
 
-export default App
+export default App;
