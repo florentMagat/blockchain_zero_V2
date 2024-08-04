@@ -1,27 +1,52 @@
-import {useEffect} from 'react';
-import {statusApi} from './APIs/checkStatus.ts';
+import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import {statusApi} from './APIs/checkStatus';
+import { listCoinsApi } from './APIs/listCoins';
+import CoinCard from './Composants/CoinCard';
 
 function App() {
   const apiKey : string = import.meta.env.VITE_API_KEY;
+  const navigate = useNavigate();
+  const [coins, setCoins] = useState<object | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const checkApiStatus = async () => {
-      
-      const apiStatus : boolean = await statusApi(apiKey);
+      const apiStatus: boolean = await statusApi(apiKey);
       if (apiStatus === false) {
         console.log('API is down');
+        navigate('/error');
       } else {
-        console.log('API is up');
+        try {
+          const data = await listCoinsApi(apiKey);
+          setCoins(data);
+        } catch (err) {
+          setError('Failed to fetch coins');
+        }
       }
     };
     checkApiStatus();
-  }, []);
+  }, [apiKey, navigate]);
+
+  console.log(coins)
 
   return (
-    <>
-      <h1 className="text-xl flex-row justify-center">blockchain_zero_v2</h1>
-    </>
-  )
+    <div className="flex flex-col justify-center items-center h-screen">
+      <h1 className="text-xl mb-4">blockchain_zero_v2</h1>
+      {error && <p className="text-red-500">{error}</p>}
+  
+      {coins && (
+        <div className="overflow-y-auto max-h-screen w-full px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {Array.isArray(coins) && coins.map((coin: any) => (
+              <CoinCard key={coin.id} coin={coin} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;
