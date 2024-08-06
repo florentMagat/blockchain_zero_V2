@@ -1,17 +1,11 @@
 import axios from 'axios';
 
-export async function listCoinsApi(apiKey : string): Promise<object> {
+export async function holdingsApi(apiKey : string): Promise<object> {
+
 
   const options = {
     method: 'GET',
-    url: 'api/coins/markets',
-    params: {
-        vs_currency: 'usd',
-        order: 'market_cap_desc',
-        per_page: 100,
-        page: 1,
-        sparkline: false
-    },
+    url: '/api/companies/public_treasury/bitcoin',
     headers: {
       accept: 'application/json', 
       'x-cg-demo-api-key': apiKey

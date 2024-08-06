@@ -33,16 +33,16 @@ function HomePage() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-    {error && <p className="text-red-500">{error}</p>}
-    {coins && (
-        <div className="overflow-y-auto max-h-screen w-full px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {Array.isArray(coins) && coins.map((coin) => (
-            <CoinCard key={coin.id} coin={coin} />
-            ))}
-        </div>
-        </div>
-    )}
+      {error && <p className="text-red-500">{error}</p>}
+      {coins && (
+          <div className="overflow-y-auto max-h-screen w-full px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {Array.isArray(coins) && coins.map((coin) => (
+              <CoinCard key={coin.id} coin={coin} />
+              ))}
+          </div>
+          </div>
+      )}
     </div>
   );
 }

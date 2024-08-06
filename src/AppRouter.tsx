@@ -6,12 +6,14 @@ import Simulateur from './Pages/Simulateur';
 import Trending from './Pages/Trending';
 import Exchanges from './Pages/Exchanges';
 import Holdings from './Pages/Holdings';
+import ErrorPage from './Pages/ErrorPage';
 
 function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
+        <Route path="/error" element={<ErrorPage />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/simulateur" element={<Simulateur />} />
         <Route path="/trending" element={<Trending />} />

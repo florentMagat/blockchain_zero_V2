@@ -9,12 +9,12 @@ const SideBar = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-center">
+    <div className="h-screen w-[12.5vw] flex flex-col justify-center items-center">
       <div className="w-full flex justify-center">
         <img 
           src="src/assets/logo_circle.png" 
           alt="logo_blockchain_zero" 
-          className="w-[70%] mt-[5vh] mb-[5vh] cursor-pointer" 
+          className="w-[60%] mt-[5vh] mb-[5vh] cursor-pointer" 
           onClick={handleLogoClick}
         />
       </div>
